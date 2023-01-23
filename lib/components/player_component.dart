@@ -6,6 +6,8 @@ import 'package:mining_crafter/global/player_data.dart';
 
 class PlayerComponent extends SpriteAnimationComponent {
   final double speed = 5;
+  // for getting a track of with side we are facing
+  bool isFacingRight = true;
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -22,17 +24,30 @@ class PlayerComponent extends SpriteAnimationComponent {
   @override
   void update(double dt) {
     super.update(dt);
+    movementLogic();
+  }
+
+  void movementLogic() {
     // Moving Left
     if (GlobalGameReference
             .instance.gameReference.worldData.playerData.componentMotionState ==
         ComponentMotionState.walkingLeft) {
       position.x -= this.speed;
+      if (isFacingRight) {
+        flipHorizontallyAroundCenter();
+        isFacingRight = false;
+      }
     }
     // Moving Right
     if (GlobalGameReference
             .instance.gameReference.worldData.playerData.componentMotionState ==
         ComponentMotionState.walkingRight) {
       position.x += this.speed;
+      // !isFacingRight == if its not facing right
+      if (!isFacingRight) {
+        flipHorizontallyAroundCenter();
+        isFacingRight = true;
+      }
     }
   }
 }
