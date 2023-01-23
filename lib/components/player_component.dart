@@ -14,8 +14,9 @@ class PlayerComponent extends SpriteAnimationComponent {
             .load('sprite_sheets/player/player_walking_sprite_sheet.png'),
         srcSize: Vector2.all(60));
 
-    animation = playerSpriteSheet.createAnimation(row: 0, stepTime: 0.5);
+    animation = playerSpriteSheet.createAnimation(row: 0, stepTime: 0.2);
     size = Vector2(100, 100);
+    position = Vector2(100, 400);
   }
 
   @override
