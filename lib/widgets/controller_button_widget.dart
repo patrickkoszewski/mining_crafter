@@ -4,26 +4,41 @@ import 'package:flutter/material.dart';
 
 class ControllerButtonWidget extends StatefulWidget {
   final String path;
-  const ControllerButtonWidget({super.key, required this.path});
+  final VoidCallback onPressed;
+  const ControllerButtonWidget(
+      {super.key, required this.path, required this.onPressed});
 
   @override
   State<ControllerButtonWidget> createState() => _ControllerButtonWidgetState();
 }
 
 class _ControllerButtonWidgetState extends State<ControllerButtonWidget> {
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GestureDetector(
-        onTap: () {
-          log('This widget has been pressed');
+        onTapDown: (_) {
+          setState(() {
+            isPressed = true;
+            widget.onPressed();
+          });
         },
-        child: SizedBox(
-            height: screenSize.height / 17,
-            width: screenSize.width / 17,
-            child: Image.asset(widget.path)),
+        onTapUp: (_) {
+          setState(() {
+            isPressed = false;
+          });
+        },
+        child: Opacity(
+          opacity: isPressed ? 0.5 : 0.8,
+          child: SizedBox(
+              height: screenSize.height / 17,
+              width: screenSize.width / 17,
+              child: Image.asset(widget.path)),
+        ),
       ),
     );
   }
