@@ -5,20 +5,35 @@ import 'package:mining_crafter/global/global_game_reference.dart';
 import 'package:mining_crafter/global/player_data.dart';
 
 class PlayerComponent extends SpriteAnimationComponent {
+  final Vector2 playerDimensions = Vector2.all(60);
+  final double stepTime = 0.3;
   final double speed = 5;
   // for getting a track of with side we are facing
   bool isFacingRight = true;
+  late SpriteSheet playerWalkingSpritesheet;
+  late SpriteSheet playerIdleSpritesheet;
+
+  late SpriteAnimation walkingAnimation =
+      playerWalkingSpritesheet.createAnimation(row: 0, stepTime: stepTime);
+
+  late SpriteAnimation idleAnimation =
+      playerIdleSpritesheet.createAnimation(row: 0, stepTime: stepTime);
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    SpriteSheet playerSpriteSheet = SpriteSheet(
+    playerWalkingSpritesheet = SpriteSheet(
         image: await Flame.images
             .load('sprite_sheets/player/player_walking_sprite_sheet.png'),
-        srcSize: Vector2.all(60));
-
-    animation = playerSpriteSheet.createAnimation(row: 0, stepTime: 0.2);
+        srcSize: playerDimensions);
+    playerIdleSpritesheet = SpriteSheet(
+        image: await Flame.images
+            .load('sprite_sheets/player/player_idle_sprite_sheet.png'),
+        srcSize: playerDimensions);
     size = Vector2(100, 100);
     position = Vector2(100, 400);
+
+    animation = idleAnimation;
   }
 
   @override
@@ -37,6 +52,8 @@ class PlayerComponent extends SpriteAnimationComponent {
         flipHorizontallyAroundCenter();
         isFacingRight = false;
       }
+
+      animation = walkingAnimation;
     }
     // Moving Right
     if (GlobalGameReference
@@ -48,6 +65,13 @@ class PlayerComponent extends SpriteAnimationComponent {
         flipHorizontallyAroundCenter();
         isFacingRight = true;
       }
+
+      animation = walkingAnimation;
+    }
+    if (GlobalGameReference
+            .instance.gameReference.worldData.playerData.componentMotionState ==
+        ComponentMotionState.idle) {
+      animation = idleAnimation;
     }
   }
 }
