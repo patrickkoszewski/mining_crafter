@@ -7,16 +7,22 @@ import 'package:mining_crafter/global/world_data.dart';
 class MainGame extends FlameGame {
   final WorldData worldData;
 
-  MainGame({required this.worldData});
+  MainGame({required this.worldData}) {
+    globalGameReference.gameReference = this;
+  }
 
-  // access to main_game.dart globbaly
+  /* 
+  access to main_game.dart globbaly
+  we can change thing here from child widgets
+  */
   GlobalGameReference globalGameReference = Get.put(GlobalGameReference());
+
+  PlayerComponent playerComponent = PlayerComponent();
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    // access to main_game.dart globbaly
-    globalGameReference.gameReference = this;
-    add(PlayerComponent());
+
+    add(playerComponent);
   }
 }
