@@ -22,6 +22,10 @@ class PlayerComponent extends SpriteAnimationComponent {
   @override
   Future<void> onLoad() async {
     super.onLoad();
+
+    //priority whitch sprite is under/above each one
+    priority = 100;
+
     playerWalkingSpritesheet = SpriteSheet(
         image: await Flame.images
             .load('sprite_sheets/player/player_walking_sprite_sheet.png'),

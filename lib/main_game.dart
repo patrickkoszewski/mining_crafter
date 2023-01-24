@@ -29,6 +29,22 @@ class MainGame extends FlameGame {
     print(ChunkGenerationMethods.instance.generateChunk());
 
     add(playerComponent);
-    add(BlockComponent(block: Blocks.cobblestone, blockIndex: Vector2(2, 1)));
+    renderChunk(ChunkGenerationMethods.instance.generateChunk());
+  }
+
+  /* 
+  going thru yIndex / xIndex 
+  chcecking if block not null and if not adding BlockComponent
+  */
+  void renderChunk(List<List<Blocks?>> chunk) {
+    chunk.asMap().forEach((int yIndex, List<Blocks?> rowOfBlocks) {
+      rowOfBlocks.asMap().forEach((int xIndex, Blocks? block) {
+        if (block != null) {
+          add(BlockComponent(
+              block: block,
+              blockIndex: Vector2(xIndex.toDouble(), yIndex.toDouble())));
+        }
+      });
+    });
   }
 }
