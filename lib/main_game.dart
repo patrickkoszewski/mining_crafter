@@ -5,6 +5,7 @@ import 'package:mining_crafter/components/player_component.dart';
 import 'package:mining_crafter/global/global_game_reference.dart';
 import 'package:mining_crafter/global/world_data.dart';
 import 'package:mining_crafter/resources/blocks.dart';
+import 'package:mining_crafter/utils/chunk_generation_methods.dart';
 
 class MainGame extends FlameGame {
   final WorldData worldData;
@@ -24,6 +25,8 @@ class MainGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     super.onLoad();
+
+    print(ChunkGenerationMethods.instance.generateChunk());
 
     add(playerComponent);
     add(BlockComponent(block: Blocks.cobblestone));

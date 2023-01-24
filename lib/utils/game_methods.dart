@@ -1,7 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/sprite.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mining_crafter/resources/blocks.dart';
 import 'package:mining_crafter/utils/constants.dart';
