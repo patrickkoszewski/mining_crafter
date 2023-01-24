@@ -26,7 +26,7 @@ class MainGame extends FlameGame {
   Future<void> onLoad() async {
     super.onLoad();
 
-    print(ChunkGenerationMethods.instance.generateChunk());
+    camera.followComponent(playerComponent);
 
     add(playerComponent);
     renderChunk(ChunkGenerationMethods.instance.generateChunk());

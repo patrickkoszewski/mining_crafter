@@ -3,6 +3,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:mining_crafter/global/global_game_reference.dart';
 import 'package:mining_crafter/global/player_data.dart';
+import 'package:mining_crafter/utils/game_methods.dart';
 
 class PlayerComponent extends SpriteAnimationComponent {
   final Vector2 playerDimensions = Vector2.all(60);
@@ -24,18 +25,21 @@ class PlayerComponent extends SpriteAnimationComponent {
     super.onLoad();
 
     //priority whitch sprite is under/above each one
-    priority = 100;
+    priority = 2;
+
+    anchor = Anchor.bottomCenter;
 
     playerWalkingSpritesheet = SpriteSheet(
         image: await Flame.images
             .load('sprite_sheets/player/player_walking_sprite_sheet.png'),
         srcSize: playerDimensions);
+
     playerIdleSpritesheet = SpriteSheet(
         image: await Flame.images
             .load('sprite_sheets/player/player_idle_sprite_sheet.png'),
         srcSize: playerDimensions);
-    size = Vector2(100, 100);
-    position = Vector2(100, 400);
+
+    position = Vector2(100, 500);
 
     animation = idleAnimation;
   }
@@ -77,6 +81,12 @@ class PlayerComponent extends SpriteAnimationComponent {
         ComponentMotionState.idle) {
       animation = idleAnimation;
     }
+  }
+
+  @override
+  void onGameResize(Vector2 newGameSize) {
+    super.onGameResize(newGameSize);
+    size = GameMethods.instance.blockSize * 1.5;
   }
 }
 
