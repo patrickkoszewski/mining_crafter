@@ -29,6 +29,6 @@ class MainGame extends FlameGame {
     print(ChunkGenerationMethods.instance.generateChunk());
 
     add(playerComponent);
-    add(BlockComponent(block: Blocks.cobblestone));
+    add(BlockComponent(block: Blocks.cobblestone, blockIndex: Vector2(2, 1)));
   }
 }
