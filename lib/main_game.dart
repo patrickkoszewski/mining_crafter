@@ -1,8 +1,10 @@
 import 'package:flame/game.dart';
 import 'package:get/get.dart';
+import 'package:mining_crafter/components/block_component.dart';
 import 'package:mining_crafter/components/player_component.dart';
 import 'package:mining_crafter/global/global_game_reference.dart';
 import 'package:mining_crafter/global/world_data.dart';
+import 'package:mining_crafter/resources/blocks.dart';
 
 class MainGame extends FlameGame {
   final WorldData worldData;
@@ -24,5 +26,6 @@ class MainGame extends FlameGame {
     super.onLoad();
 
     add(playerComponent);
+    add(BlockComponent(block: Blocks.cobblestone));
   }
 }
