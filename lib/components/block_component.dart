@@ -13,13 +13,13 @@ class BlockComponent extends SpriteComponent {
     super.onLoad();
 
     sprite = await GameMethods.instance.getSpriteFromBlock(block);
-    position = Vector2(GameMethods.instance.blockSize.x * blockIndex.x,
-        GameMethods.instance.blockSize.x * blockIndex.y);
   }
 
   //function called every time screen size is changed
   void onGameResize(Vector2 newGameSize) {
     super.onGameResize(newGameSize);
     size = GameMethods.instance.blockSize;
+    position = Vector2(GameMethods.instance.blockSize.x * blockIndex.x,
+        GameMethods.instance.blockSize.x * blockIndex.y);
   }
 }
