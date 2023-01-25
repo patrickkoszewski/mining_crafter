@@ -39,7 +39,7 @@ class PlayerComponent extends SpriteAnimationComponent {
             .load('sprite_sheets/player/player_idle_sprite_sheet.png'),
         srcSize: playerDimensions);
 
-    position = Vector2(100, 500);
+    position = Vector2(100, 700);
 
     animation = idleAnimation;
   }

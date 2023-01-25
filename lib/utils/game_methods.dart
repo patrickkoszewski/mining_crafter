@@ -19,6 +19,11 @@ class GameMethods {
     return Vector2.all(getScreenSize().width / chunkWidth);
   }
 
+  //nothing generating in the top 40%
+  int get freeArea {
+    return (chunkHeight * 0.4).toInt();
+  }
+
   //Function that gives as a screen size
   Size getScreenSize() {
     return MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
